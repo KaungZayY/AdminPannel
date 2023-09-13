@@ -46,15 +46,19 @@
                         </li>
                         <!-- Logout Button -->
                         <li class="mb-2 bg-red-600 rounded hover:bg-red-700 mt-auto absolute bottom-0">
-                            <a href="#" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2 -mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <!-- Icon for "Logout" -->
-                                    <!-- You can replace this icon with your logout icon -->
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                                Logout
-                            </a>
-                        </li>                        
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2 -mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <!-- Icon for "Logout" -->
+                                        <!-- You can replace this icon with your logout icon -->
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                                              
                     </ul>
                 </div>
             </div>
