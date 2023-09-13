@@ -34,11 +34,11 @@
             </select>
         </div>
         <div class="mb-4 mt-10">
-            <label for="item_condition" class="block text-sm font-medium text-gray-700">Select Item Condition</label>
-            <select id="item_condition" name="item_condition" class="block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200">
-                <option value="New">Sell</option>
-                <option value="Good">Buy</option>
-                <option value="Good Second">Trade</option>
+            <label for="item_type" class="block text-sm font-medium text-gray-700">Select Item Type</label>
+            <select id="item_type" name="item_type" class="block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200">
+                <option value="Sell">Sell</option>
+                <option value="Buy">Buy</option>
+                <option value="Trade">Trade</option>
             </select>
         </div>
         <div class="mb-4 mt-10">
@@ -62,49 +62,6 @@
             <!-- Display the selected file name -->
             <div id="file-name" class="mt-2 text-gray-700"></div>
         </div>
-        
-        <script>
-            // JavaScript to handle file input when the label is clicked
-            const dropZone = document.getElementById('dropZone');
-            const fileInput = document.getElementById('category_photo');
-            const fileNameDisplay = document.getElementById('file-name');
-        
-            // Trigger file input when the drop zone is clicked
-            dropZone.addEventListener('click', () => {
-                fileInput.click();
-            });
-        
-            // Handle file selection via drag and drop
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('border-blue-500'); // Highlight the drop zone
-            });
-        
-            dropZone.addEventListener('dragleave', () => {
-                dropZone.classList.remove('border-blue-500'); // Remove highlight on drag leave
-            });
-        
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('border-blue-500'); // Remove highlight on drop
-                const files = e.dataTransfer.files;
-        
-                // Assign the selected files to the file input
-                fileInput.files = files;
-        
-                // Display the selected file name
-                if (files.length > 0) {
-                    fileNameDisplay.textContent = files[0].name;
-                }
-            });
-        
-            // Update file name when a file is selected
-            fileInput.addEventListener('change', () => {
-                if (fileInput.files.length > 0) {
-                    fileNameDisplay.textContent = fileInput.files[0].name;
-                }
-            });
-        </script>    
 </div>
 
 <div class="container mx-left max-w-md p-6">
@@ -134,6 +91,49 @@
 @endsection
 
 @section('scripts')
+<script>
+    // JavaScript to handle file input when the label is clicked
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('item_photo');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    // Trigger file input when the drop zone is clicked
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Handle file selection via drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-blue-500'); // Highlight the drop zone
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-blue-500'); // Remove highlight on drag leave
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-blue-500'); // Remove highlight on drop
+        const files = e.dataTransfer.files;
+
+        // Assign the selected files to the file input
+        fileInput.files = files;
+
+        // Display the selected file name
+        if (files.length > 0) {
+            fileNameDisplay.textContent = files[0].name;
+        }
+    });
+
+    // Update file name when a file is selected
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        }
+    });
+</script>    
+
 <script>
     ClassicEditor
         .create( document.querySelector( '#txt-description' ) )
