@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin_pannel.category');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/category',[CategoryController::class,'index'])->name('category');
+Route::get('/category/add', [CategoryController::class, 'create'])->name('category.add.create');
+Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
 
 require __DIR__.'/auth.php';

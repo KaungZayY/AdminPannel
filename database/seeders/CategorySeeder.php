@@ -15,7 +15,13 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'category'=>'pen',
-            'status'=>'Open',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'smart phone',
+            'status'=>0,
             'created_at'=>now(),
             'updated_at'=>now(),
         ]);

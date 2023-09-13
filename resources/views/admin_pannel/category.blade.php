@@ -3,10 +3,36 @@
 @section('content')
 <div class="w-full px-4 py-2 bg-gray-200 lg:w-full">
     <div class="container mx-auto mt-2">
+        <div id="messageContainer">
+            @if(session('success'))
+                <div class="bg-green-500 text-white p-4 rounded-lg">{{ session('success') }}</div>            
+            @elseif(session('error'))
+                <div class="bg-red-500 text-white p-4 rounded-lg">{{ session('error') }}</div>
+            @endif
+        </div>
+        <script>
+            // Wait for the document to be fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                // Select the message container element by its ID
+                var messageContainer = document.getElementById('messageContainer');
+                
+                // Check if the message container exists
+                if (messageContainer) {
+                    // Automatically hide the message container after 5 seconds (5000 milliseconds)
+                    setTimeout(function() {
+                        messageContainer.style.display = 'none'; // Hide the element
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                }
+            });
+        </script>
+                
         <div class="flex justify-end">
-            <button type="submit" class="bg-indigo-600 hover:shadow hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-                + Add New Category
-            </button>
+            <form action="{{route('category.add.create')}}" method="GET">
+                @csrf
+                <button type="submit" class="bg-indigo-600 hover:shadow hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+                    + Add New Category
+                </button>
+            </form>
         </div>
         @if ($categories->count())
         <div class="flex flex-col mt-2">
@@ -69,7 +95,7 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                @if ($category->status=="Open")
+                                @if ($category->status==1)
                                     <label class="relative inline-block w-10 h-5 transition duration-200 ease-in-out bg-green-500 rounded-full cursor-pointer">
                                         <input type="checkbox" class="absolute w-5 h-5 rounded-full bg-white border-2 border-green-500 appearance-none checked:right-0 transform translate-x-full cursor-pointer" checked />
                                     </label>
