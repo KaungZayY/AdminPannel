@@ -66,6 +66,8 @@
             {{--content here, also need to make li active--}}
             @yield('content')
         </div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+        @yield('scripts')
     </body>
 
 </html>

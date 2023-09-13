@@ -23,7 +23,7 @@
         </div>
         <div class="mb-4 mt-10">
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-            <input type="text" name="description" id="description" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <textarea name="description" id="txt-description" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"></textarea>
         </div>
         <div class="mb-4 mt-10">
             <label for="item_condition" class="block text-sm font-medium text-gray-700">Select Item Condition</label>
@@ -129,6 +129,17 @@
         </div>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#txt-description' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
 @endsection
 
 
