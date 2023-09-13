@@ -7,6 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PS-Assignment</title>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        {{-- leaflet --}}
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        {{-- intl tel input --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
     </head>
 
     <body>

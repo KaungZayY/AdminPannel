@@ -120,9 +120,11 @@
         </div>
         <div class="mb-4 mt-10">
             <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-            <input type="text" name="address" id="address" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="address" id="locationInput" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
-        
+        <div class="mb-4 mt-10" id="map" style="height: 400px;">
+            
+        </div>
         <div class="mt-4 mt-10">
             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Submit</button>
             <a href="{{ route('item') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 ml-2">Cancel</a>
@@ -138,6 +140,33 @@
         .catch( error => {
             console.error( error );
         } );
+</script>
+
+<script>
+    var map = L.map('map').setView([16.8661, 96.1951], 13); // Set the initial view to Yangon, Myanmar
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    var marker = L.marker([16.8661, 96.1951], {
+        draggable: true
+    }).addTo(map);
+
+    marker.bindPopup('A sample marker on the map.').openPopup();
+
+    marker.on('dragend', function (event) {
+        var markerLatLng = marker.getLatLng();
+        document.getElementById('locationInput').value = markerLatLng.lat + ', ' + markerLatLng.lng;
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#phone_number");
+  window.intlTelInput(input, {
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+  });
 </script>
 
 @endsection
