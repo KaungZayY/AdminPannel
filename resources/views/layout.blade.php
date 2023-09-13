@@ -22,7 +22,7 @@
                     </div>
                     <ul>
                         <li class="mb-2 rounded hover:shadow hover:bg-gray-800">
-                            <a href="#" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
+                            <a href="{{route('item')}}" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2 -mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     
                                     <!-- Inner boxes (represents items) -->
@@ -35,8 +35,9 @@
                                 Item
                             </a>
                         </li>
-                        <li class="mb-2 bg-gray-800 rounded shadow">
-                            <a href="#" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
+                        <li class="mb-2 rounded hover:shadow hover:bg-gray-800">
+                        {{-- <li class="mb-2 bg-gray-800 rounded shadow"> --}}
+                            <a href="{{route('category')}}" class="inline-block w-full h-full px-3 py-2 font-bold text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2 -mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <!-- Top bar -->
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

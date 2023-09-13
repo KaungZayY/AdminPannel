@@ -19,4 +19,8 @@ class Category extends Model
         'category_photo',
         'status',
     ];
+
+    public function items(){
+        return $this->hasMany(Item::class);
+    }
 }

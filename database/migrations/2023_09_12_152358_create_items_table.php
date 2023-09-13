@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('item_condition');
             $table->string('item_type');
-            $table->string('status');
+            $table->integer('status');
             $table->string('item_photo')->nullable();
             $table->string('owner_name');
             $table->string('phone_number');
