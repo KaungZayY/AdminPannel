@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -11,5 +12,10 @@ class ItemController extends Controller
     {
         $items = Item::paginate(5);
         return view('admin_pannel.items.item',compact('items'));
+    }
+    public function create()
+    {
+        $categories = Category::get();
+        return view('admin_pannel.items.itemAdd',compact('categories'));
     }
 }

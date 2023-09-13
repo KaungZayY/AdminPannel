@@ -40,5 +40,8 @@ Route::post('/category{category}/delete', [CategoryController::class, 'destroy']
 
 //item CRUD
 Route::get('/item',[ItemController::class,'index'])->name('item');
+Route::get('/item/add', [ItemController::class, 'create'])->name('item.add.create');
+Route::post('/item/store', [ItemController::class, 'store'])->name('item.store');
+
 
 require __DIR__.'/auth.php';

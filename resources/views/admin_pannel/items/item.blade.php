@@ -27,12 +27,12 @@
         </script> --}}
                 
         <div class="flex justify-end">
-            {{-- <form action="{{route('category.add.create')}}" method="GET">
-                @csrf --}}
+            <form action="{{route('item.add.create')}}" method="GET">
+                @csrf
                 <button type="submit" class="bg-indigo-600 hover:shadow hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
                     + Add Item
                 </button>
-            {{-- </form> --}}
+            </form>
         </div>
         @if ($items->count())
         <div class="flex flex-col mt-2">
