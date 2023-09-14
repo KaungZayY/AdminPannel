@@ -15,7 +15,37 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'category'=>'pen',
-            'status'=>'Open',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'mouse',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'keyboard',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'glass',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'charger',
+            'status'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        DB::table('categories')->insert([
+            'category'=>'watch',
+            'status'=>1,
             'created_at'=>now(),
             'updated_at'=>now(),
         ]);
