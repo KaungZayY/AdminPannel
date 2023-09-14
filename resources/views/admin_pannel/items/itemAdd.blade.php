@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-left max-w-md p-6">
     <h1 class="text-2xl font-semibold">Item Information</h1>
-    <form method="POST" action="{{route('item.store')}}" enctype="multipart/form-data" class="mt-4">
+    <form method="POST" action="{{route('item.store')}}" enctype="multipart/form-data" class="mt-4" id="myForm">
         @csrf
         <div class="mb-4 mt-10">
             <label for="item_name" class="block text-sm font-medium text-gray-700">Item Name</label>
@@ -73,6 +73,7 @@
         </div>
         <div class="mb-4 mt-10">
             <label for="phone_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
+            <input type="hidden" name="phone_number" id="hidden_phone_number">
             <input type="text" name="phone_number" id="phone_number" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10">
@@ -161,13 +162,40 @@
     });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
   const input = document.querySelector("#phone_number");
   window.intlTelInput(input, {
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
   });
-</script>
+</script> --}}
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+    const input = document.querySelector("#phone_number");
+    const hiddenInput = document.querySelector("#hidden_phone_number");
+  
+    const iti = window.intlTelInput(input, {
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+      hiddenInput: "full", // or "e164" if you want the E.164 format
+    });
+  
+    // Listen for form submission
+    const form = document.querySelector("#myForm");
+    form.addEventListener("submit", function (event) {
+      // Prevent the default form submission
+      event.preventDefault();
+  
+      // Get the full international number using getNumber
+      const fullNumber = iti.getNumber();
+  
+      // Populate the hidden input field with the full number
+      hiddenInput.value = fullNumber;
+  
+      // Now you can submit the form
+      form.submit();
+    });
+  </script>
+  
 
 @endsection
 
