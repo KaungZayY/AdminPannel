@@ -17,7 +17,7 @@ class ItemController extends Controller
 
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::get()->where('status',1);
         return view('admin_pannel.items.itemAdd',compact('categories'));
     }
 

@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="w-full px-4 py-2 bg-gray-200 lg:w-full">
+    <div class="bg-your-color font-semibold">category -&gt; category list</div>
+    <h1 class="text-3xl font-bold">Category List</h1>
     <div class="container mx-auto mt-2">
         <div id="messageContainer">
             @if(session('success'))
@@ -104,14 +106,14 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                @if ($category->status==1)
-                                    <label class="relative inline-block w-10 h-5 transition duration-200 ease-in-out bg-green-500 rounded-full cursor-pointer">
-                                        <input type="checkbox" class="absolute w-5 h-5 rounded-full bg-white border-2 border-green-500 appearance-none checked:right-0 transform translate-x-full cursor-pointer" checked />
-                                    </label>
+                                    @if ($category->status==1)
+                                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                        Active
+                                    </span>
                                 @else
-                                    <label class="relative inline-block w-10 h-5 transition duration-200 ease-in-out bg-gray-400 rounded-full cursor-pointer">
-                                        <input type="checkbox" class="absolute w-5 h-5 rounded-full bg-white border-2 border-gray-400 appearance-none cursor-pointer" />
-                                    </label>
+                                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">
+                                        Inactive
+                                    </span>
                                 @endif
                                 </td>
                             </tr>
