@@ -2,24 +2,26 @@
 
 @section('content')
 <div class="container mx-left max-w-md p-6">
-    <h1 class="text-2xl font-semibold">Item Information</h1>
-    <form method="POST" action="{{route('item.store')}}" enctype="multipart/form-data" class="mt-4" id="myForm">
+    <h1 class="text-2xl font-semibold">Item Update Information</h1>
+    <form method="POST" action="{{route('item.update',$item)}}" enctype="multipart/form-data" class="mt-4" id="myForm">
         @csrf
         <div class="mb-4 mt-10">
             <label for="item_name" class="block text-sm font-medium text-gray-700">Item Name</label>
-            <input type="text" name="item_name" id="item_name" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="item_name" id="item_name" value="{{$item->item_name}}" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10">
             <label for="category_id" class="block text-sm font-medium text-gray-700">Select Category</label>
             <select id="category_id" name="category_id" class="block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->category }}</option>
+                    <option value="{{ $category->id }}" {{ $category->id == $item->category_id ? 'selected' : '' }}>
+                        {{ $category->category }}
+                    </option>
                 @endforeach
             </select>
         </div>
         <div class="mb-4 mt-10">
             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-            <input type="text" name="price" id="price" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="price" id="price" value="{{$item->price}}" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10">
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
@@ -28,24 +30,24 @@
         <div class="mb-4 mt-10">
             <label for="item_condition" class="block text-sm font-medium text-gray-700">Select Item Condition</label>
             <select id="item_condition" name="item_condition" class="block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200">
-                <option value="Brand New">New</option>
-                <option value="Used">Used</option>
-                <option value="Good Second">Good Second</option>
+                <option value="Brand New" {{ $item->item_condition === 'Brand New' ? 'selected' : '' }}>New</option>
+                <option value="Used" {{ $item->item_condition === 'Used' ? 'selected' : '' }}>Used</option>
+                <option value="Good Second" {{ $item->item_condition === 'Good Second' ? 'selected' : '' }}>Good Second</option>
             </select>
         </div>
         <div class="mb-4 mt-10">
             <label for="item_type" class="block text-sm font-medium text-gray-700">Select Item Type</label>
             <select id="item_type" name="item_type" class="block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200">
-                <option value="Sell">Sell</option>
-                <option value="Buy">Buy</option>
-                <option value="Trade">Trade</option>
+                <option value="Sell" {{ $item->item_type === 'Sell' ? 'selected' : '' }}>Sell</option>
+                <option value="Buy" {{ $item->item_type === 'Buy' ? 'selected' : '' }}>Buy</option>
+                <option value="Trade" {{ $item->item_type === 'Trade' ? 'selected' : '' }}>Trade</option>
             </select>
         </div>
         <div class="mb-4 mt-10">
             <label class="block text-sm font-medium text-gray-700">Status</label>
             <div class="mt-2 space-y-2">
                 <label for="status_active" class="inline-flex items-center">
-                    <input type="checkbox" name="status" id="status_active" class="form-checkbox text-blue-600 focus:ring focus:ring-blue-200" value="1">
+                    <input type="checkbox" name="status" id="status_active" class="form-checkbox text-blue-600 focus:ring focus:ring-blue-200" value="1" {{ $item->status == 1 ? 'checked' : '' }}>
                     <span class="ml-2">Publish</span>
                 </label>
             </div>
@@ -69,16 +71,16 @@
     
         <div class="mb-4 mt-10">
             <label for="owner_name" class="block text-sm font-medium text-gray-700">Owner Name</label>
-            <input type="text" name="owner_name" id="owner_name" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="owner_name" id="owner_name" value="{{$item->owner_name}}" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10">
             <label for="phone_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
             <input type="hidden" name="phone_number" id="hidden_phone_number">
-            <input type="text" name="phone_number" id="phone_number" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="phone_number" id="phone_number" value="{{$item->phone_number}}" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10">
             <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-            <input type="text" name="address" id="locationInput" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
+            <input type="text" name="address" id="locationInput" value="{{$item->address}}" class="mt-1 p-2 w-full rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200" required>
         </div>
         <div class="mb-4 mt-10" id="map" style="height: 400px;">
             
@@ -138,6 +140,9 @@
 <script>
     ClassicEditor
         .create( document.querySelector( '#description' ) )
+        .then(editor => {
+                editor.setData(`{!! $item->description !!}`);
+            })
         .catch( error => {
             console.error( error );
         } );
@@ -198,9 +203,3 @@
   
 
 @endsection
-
-
-
-
-
-

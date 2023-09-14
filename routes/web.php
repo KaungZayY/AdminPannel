@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,18 +27,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//category CRUD
-Route::get('/category',[CategoryController::class,'index'])->name('category');
-Route::get('/category/add', [CategoryController::class, 'create'])->name('category.add.create');
-Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-Route::get('/category{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
-Route::post('/category{category}/update', [CategoryController::class, 'update'])->name('category.update');
-Route::post('/category{category}/delete', [CategoryController::class, 'destroy'])->name('category.delete');
+// wrap around with auth middleware
+Route::middleware(['auth'])->group(function () {
+    // Category CRUD
+    Route::get('/category', [CategoryController::class, 'index'])->name('category');
+    Route::get('/category/add', [CategoryController::class, 'create'])->name('category.add.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category/{category}/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::post('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('category.delete');
 
-//item CRUD
-Route::get('/item',[ItemController::class,'index'])->name('item');
-Route::get('/item/add', [ItemController::class, 'create'])->name('item.add.create');
-Route::post('/item/store', [ItemController::class, 'store'])->name('item.store');
+    // Item CRUD
+    Route::get('/', [ItemController::class, 'index'])->name('item');
+    Route::get('/item/add', [ItemController::class, 'create'])->name('item.add.create');
+    Route::post('/item/store', [ItemController::class, 'store'])->name('item.store');
+    Route::get('/item/{item}/edit', [ItemController::class, 'edit'])->name('item.edit');
+    Route::post('/item/{item}/update', [ItemController::class, 'update'])->name('item.update');
+    Route::post('/item/{item}/delete', [ItemController::class, 'destroy'])->name('item.delete');
+});
 
 
 require __DIR__.'/auth.php';
