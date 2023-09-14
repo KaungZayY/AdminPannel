@@ -39,11 +39,14 @@
         @if ($categories->count())
         <div class="flex flex-col mt-2">
             <div class="flex items-center space-x-4">
-                <span>Show:</span>
-                <select id="rowsPerPage" class="border rounded px-2 py-1 bg-blue-200">
-                    <option value="5">5 rows</option>
-                    <option value="10">10 rows</option>
-                </select>
+                <form method="get">
+                    <label for="perPage">Show:</label>
+                    <select name="perPage" class="border rounded px-2 py-1 bg-blue-200" id="perPage" onchange="this.form.submit()">
+                        <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                        <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                        <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                    </select>
+                </form>
             </div>
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-2">
                 <div

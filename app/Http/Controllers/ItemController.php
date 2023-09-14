@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::paginate(5);
+        $perPage = $request->input('perPage', 5);
+        $items = Item::paginate($perPage);
         return view('admin_pannel.items.item',compact('items'));
     }
 

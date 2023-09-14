@@ -14,15 +14,16 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(5);
-        return view('admin_pannel.category',compact('categories'));
+        $perPage = $request->input('perPage', 5);
+        $categories = Category::paginate($perPage);
+        return view('admin_pannel.categories.category',compact('categories'));
     }
 
     public function create()
     {
-        return view('admin_pannel.categoryAdd');
+        return view('admin_pannel.categories.categoryAdd');
     }
 
     /**
@@ -49,10 +50,10 @@ class CategoryController extends Controller
         if ($request->hasFile('category_photo')) {
             $image = $request->file('category_photo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
+            $image->move(public_path('images/categories/'), $imageName);
 
             // Save the image path in the database if needed
-            $category->category_photo = 'images/' . $imageName;
+            $category->category_photo = 'images/categories/' . $imageName;
         }
         $category->save();
         return redirect()->route('category')->with('success', 'Category added successfully');
@@ -66,7 +67,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin_pannel.categoryEdit',[
+        return view('admin_pannel.categories.categoryEdit',[
             'category'=>$category
         ]);
     }
@@ -101,10 +102,10 @@ class CategoryController extends Controller
                 unlink(public_path($category->category_photo));
             }
      
-            $image->move(public_path('images'), $imageName);
+            $image->move(public_path('images/categories/'), $imageName);
      
             // Save the image path in the database
-            $category->category_photo = 'images/' . $imageName;
+            $category->category_photo = 'images/categories/' . $imageName;
         }
      
         // Update other category properties
